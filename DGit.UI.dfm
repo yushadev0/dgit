@@ -4,6 +4,69 @@ object Frame1: TFrame1
   Width = 325
   Height = 480
   TabOrder = 0
+  object pnlRepo: TPanel
+    Left = 0
+    Top = 0
+    Width = 325
+    Height = 480
+    Align = alClient
+    TabOrder = 1
+    object memoCommit: TMemo
+      AlignWithMargins = True
+      Left = 4
+      Top = 378
+      Width = 317
+      Height = 67
+      Hint = 'Commit Message'
+      Align = alBottom
+      ParentShowHint = False
+      ScrollBars = ssVertical
+      ShowHint = True
+      TabOrder = 0
+    end
+    object btnCommit: TButton
+      AlignWithMargins = True
+      Left = 4
+      Top = 451
+      Width = 317
+      Height = 25
+      Align = alBottom
+      Caption = 'Commit'
+      Style = bsSplitButton
+      TabOrder = 1
+      OnClick = btnCommitClick
+      OnDropDownClick = btnCommitDropDownClick
+    end
+    object tvFiles: TTreeView
+      Left = 1
+      Top = 1
+      Width = 323
+      Height = 329
+      Align = alClient
+      CheckBoxes = True
+      Images = imgGitStatus
+      Indent = 19
+      TabOrder = 2
+    end
+    object chkSelectAll: TCheckBox
+      AlignWithMargins = True
+      Left = 6
+      Top = 333
+      Width = 315
+      Height = 39
+      Margins.Left = 5
+      Align = alBottom
+      Caption = 'Select All'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = chkSelectAllClick
+    end
+  end
   object pnlNoRepo: TPanel
     Left = 0
     Top = 0
@@ -36,7 +99,7 @@ object Frame1: TFrame1
       Height = 50
       Margins.Top = 50
       Align = alTop
-      Caption = 'Create a git Repository'
+      Caption = 'Initialize Repository'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -17
@@ -62,74 +125,6 @@ object Frame1: TFrame1
       ParentFont = False
       TabOrder = 1
       OnClick = btnCloneClick
-    end
-  end
-  object pnlRepo: TPanel
-    Left = 0
-    Top = 0
-    Width = 325
-    Height = 480
-    Align = alClient
-    TabOrder = 1
-    object memoCommit: TMemo
-      AlignWithMargins = True
-      Left = 4
-      Top = 378
-      Width = 317
-      Height = 67
-      Hint = 'Commit Message'
-      Align = alBottom
-      ParentShowHint = False
-      ScrollBars = ssVertical
-      ShowHint = True
-      TabOrder = 0
-      ExplicitLeft = 8
-    end
-    object btnCommit: TButton
-      AlignWithMargins = True
-      Left = 4
-      Top = 451
-      Width = 317
-      Height = 25
-      Align = alBottom
-      Caption = 'Commit'
-      Style = bsSplitButton
-      TabOrder = 1
-      OnClick = btnCommitClick
-      OnDropDownClick = btnCommitDropDownClick
-    end
-    object tvFiles: TTreeView
-      Left = 1
-      Top = 1
-      Width = 323
-      Height = 329
-      Align = alClient
-      CheckBoxes = True
-      Images = imgGitStatus
-      Indent = 19
-      TabOrder = 2
-      ExplicitHeight = 335
-    end
-    object chkSelectAll: TCheckBox
-      AlignWithMargins = True
-      Left = 6
-      Top = 333
-      Width = 315
-      Height = 39
-      Margins.Left = 5
-      Align = alBottom
-      Caption = 'Select All'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -20
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
-      OnClick = chkSelectAllClick
-      ExplicitLeft = 1
-      ExplicitTop = 336
-      ExplicitWidth = 323
     end
   end
   object tmrGitCheck: TTimer

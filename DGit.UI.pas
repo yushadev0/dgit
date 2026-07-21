@@ -366,7 +366,7 @@ end;
 
 procedure TFrame1.btnCloneClick(Sender: TObject);
 begin
-  ShowMessage('clone işlemleri');
+  ShowMessage('cloning stuff. will be build.');
 end;
 
 procedure TFrame1.btnCommitClick(Sender: TObject);
