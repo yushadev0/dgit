@@ -74,9 +74,9 @@ object Frame1: TFrame1
     object memoCommit: TMemo
       AlignWithMargins = True
       Left = 4
-      Top = 356
+      Top = 378
       Width = 317
-      Height = 89
+      Height = 67
       Align = alBottom
       Lines.Strings = (
         'MemoCommit')
@@ -91,21 +91,38 @@ object Frame1: TFrame1
       Height = 25
       Align = alBottom
       Caption = 'Commit'
-      DropDownMenu = pmCommit
       Style = bsSplitButton
       TabOrder = 1
       OnClick = btnCommitClick
+      OnDropDownClick = btnCommitDropDownClick
     end
     object tvFiles: TTreeView
       Left = 1
       Top = 1
       Width = 323
-      Height = 352
+      Height = 335
       Align = alClient
       CheckBoxes = True
       Images = imgGitStatus
       Indent = 19
       TabOrder = 2
+      ExplicitHeight = 352
+    end
+    object chkSelectAll: TCheckBox
+      Left = 1
+      Top = 336
+      Width = 323
+      Height = 39
+      Align = alBottom
+      Caption = 'Select All'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = chkSelectAllClick
     end
   end
   object tmrGitCheck: TTimer

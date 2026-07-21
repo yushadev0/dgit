@@ -27,11 +27,14 @@ type
     imgGitStatus: TImageList;
     pmCommit: TPopupMenu;
     miCommitAndPush: TMenuItem;
+    chkSelectAll: TCheckBox;
     procedure btnCommitClick(Sender: TObject);
     procedure btnInitClick(Sender: TObject);
     procedure btnCloneClick(Sender: TObject);
     procedure tmrGitCheckTimer(Sender: TObject);
     procedure miCommitAndPushClick(Sender: TObject);
+    procedure btnCommitDropDownClick(Sender: TObject);
+    procedure chkSelectAllClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,6 +42,8 @@ type
     procedure CheckRepositoryState;
     procedure RefreshFileList;
     procedure ExecuteCommit(PushAfter: Boolean);
+
+    var FLastGitStatus: string;
   end;
 
 type
@@ -367,6 +372,16 @@ begin
   ExecuteCommit(False);
 end;
 
+procedure TFrame1.btnCommitDropDownClick(Sender: TObject);
+var
+  P: TPoint;
+begin
+  P := Point(btnCommit.Width, btnCommit.Height);
+  P := btnCommit.ClientToScreen(P);
+  pmCommit.Alignment := paRight;
+  pmCommit.Popup(P.X, P.Y);
+end;
+
 procedure TFrame1.btnInitClick(Sender: TObject);
 var
   ProjDir: string;
@@ -417,6 +432,24 @@ begin
       // Paneli yeni açtığımız için dosyaları da bir kere dolduralım
       RefreshFileList;
     end;
+  end;
+end;
+
+procedure TFrame1.chkSelectAllClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  // Ekranın titremesini engeller ve döngüyü hızlandırır
+  tvFiles.Items.BeginUpdate;
+  try
+    for i := 0 to tvFiles.Items.Count - 1 do
+    begin
+      // TreeView'daki her bir elemanın durumunu, bizim Select All kutucuğunun durumuna eşitleriz
+      tvFiles.Items[i].Checked := chkSelectAll.Checked;
+    end;
+  finally
+    // İşlem bitince ekranı tek seferde yeniden çizer
+    tvFiles.Items.EndUpdate;
   end;
 end;
 
@@ -538,8 +571,24 @@ begin
 end;
 
 procedure TFrame1.tmrGitCheckTimer(Sender: TObject);
+var
+  ProjDir, CurrentStatus: string;
 begin
+  // Mevcut repo kontrolünü yapmaya devam et
   CheckRepositoryState;
+
+  ProjDir := GetActiveProjectDir;
+  if ProjDir = '' then Exit;
+
+  // Git'in kısa ve net durum özetini al
+  CurrentStatus := Trim(RunGitCommand('git status --porcelain', ProjDir));
+
+  // Eğer son durum hafızadakinden farklıysa (gerçekten bir dosya değişmişse)
+  if CurrentStatus <> FLastGitStatus then
+  begin
+    FLastGitStatus := CurrentStatus; // Yeni durumu hafızaya al
+    RefreshFileList;                 // Ve sadece şimdi listeyi yenile!
+  end;
 end;
 
 procedure TFrame1.ExecuteCommit(PushAfter: Boolean);
