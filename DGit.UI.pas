@@ -583,7 +583,7 @@ begin
   // Git'in kısa ve net durum özetini al
   CurrentStatus := Trim(RunGitCommand('git status --porcelain', ProjDir));
 
-  // Eğer son durum hafızadakinden farklıysa (gerçekten bir dosya değişmişse)
+  // Eğer son durum hafızaasdasddakinden farklıysa (gerçekten bir dosya değişmişse)
   if CurrentStatus <> FLastGitStatus then
   begin
     FLastGitStatus := CurrentStatus; // Yeni durumu hafızaya al
