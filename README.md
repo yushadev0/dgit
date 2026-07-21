@@ -6,7 +6,9 @@ DGit is a fully native, dockable Git plugin for the Delphi IDE that brings moder
 
 ## Screenshot
 
-![DGit Screenshot](...)
+![DGit Screenshot](varliklar/ss1.png)
+![DGit Screenshot](varliklar/ss2.png)
+![DGit Screenshot](varliklar/ss3.png)
 
 ---
 
