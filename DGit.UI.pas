@@ -28,6 +28,7 @@ type
     pmCommit: TPopupMenu;
     miCommitAndPush: TMenuItem;
     chkSelectAll: TCheckBox;
+    miPushOnly: TMenuItem;
     procedure btnCommitClick(Sender: TObject);
     procedure btnInitClick(Sender: TObject);
     procedure btnCloneClick(Sender: TObject);
@@ -35,6 +36,7 @@ type
     procedure miCommitAndPushClick(Sender: TObject);
     procedure btnCommitDropDownClick(Sender: TObject);
     procedure chkSelectAllClick(Sender: TObject);
+    procedure miPushOnlyClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -681,6 +683,36 @@ end;
 procedure TFrame1.miCommitAndPushClick(Sender: TObject);
 begin
 ExecuteCommit(True);
+end;
+
+procedure TFrame1.miPushOnlyClick(Sender: TObject);
+var
+  ProjDir, BranchName, GitOutput: string;
+begin
+  ProjDir := GetActiveProjectDir;
+  if ProjDir = '' then Exit;
+
+  // 1. Önce aktif dalı (branch) bulalım
+  BranchName := Trim(RunGitCommand('git branch --show-current', ProjDir));
+
+  if BranchName = '' then
+  begin
+    ShowMessage('No active branch found! Please create or checkout a branch first.');
+    Exit;
+  end;
+
+  // 2. Push işlemi (İlk push olma ihtimaline karşı -u parametresiyle garantiye alıyoruz)
+  GitOutput := RunGitCommand('git push -u origin ' + BranchName, ProjDir);
+
+  // 3. Sonuç Kontrolü
+  if (Pos('fatal:', GitOutput) > 0) or (Pos('error:', GitOutput) > 0) then
+  begin
+    ShowMessage('Push failed!' + sLineBreak + sLineBreak + 'Git Error: ' + GitOutput);
+  end
+  else
+  begin
+    ShowMessage('Successfully pushed to ''' + BranchName + '''!');
+  end;
 end;
 
 end.

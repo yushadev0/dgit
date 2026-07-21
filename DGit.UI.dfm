@@ -106,7 +106,6 @@ object Frame1: TFrame1
       Images = imgGitStatus
       Indent = 19
       TabOrder = 2
-      ExplicitHeight = 352
     end
     object chkSelectAll: TCheckBox
       Left = 1
@@ -412,6 +411,10 @@ object Frame1: TFrame1
     object miCommitAndPush: TMenuItem
       Caption = 'Commit and Push'
       OnClick = miCommitAndPushClick
+    end
+    object miPushOnly: TMenuItem
+      Caption = 'Push'
+      OnClick = miPushOnlyClick
     end
   end
 end
