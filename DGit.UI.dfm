@@ -92,9 +92,9 @@ object Frame1: TFrame1
       Align = alBottom
       Caption = 'Commit'
       DropDownMenu = pmCommit
+      Style = bsSplitButton
       TabOrder = 1
       OnClick = btnCommitClick
-      ExplicitLeft = 8
     end
     object tvFiles: TTreeView
       Left = 1
@@ -393,14 +393,8 @@ object Frame1: TFrame1
     Left = 264
     Top = 392
     object miCommitAndPush: TMenuItem
-      Caption = 'Commit & Push'
+      Caption = 'Commit and Push'
       OnClick = miCommitAndPushClick
-    end
-    object asd1: TMenuItem
-      Caption = 'asd'
-    end
-    object asd2: TMenuItem
-      Caption = 'asd'
     end
   end
 end

@@ -27,8 +27,6 @@ type
     imgGitStatus: TImageList;
     pmCommit: TPopupMenu;
     miCommitAndPush: TMenuItem;
-    asd1: TMenuItem;
-    asd2: TMenuItem;
     procedure btnCommitClick(Sender: TObject);
     procedure btnInitClick(Sender: TObject);
     procedure btnCloneClick(Sender: TObject);
