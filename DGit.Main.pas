@@ -95,6 +95,7 @@ begin
 
     NTAServices.MainMenu.Items.Add(DGitTopMenu);
   end;
+
 end;
 
 // Paket kapatılırken RAM'de kalanları temizle

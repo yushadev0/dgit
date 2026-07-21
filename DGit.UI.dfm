@@ -77,11 +77,13 @@ object Frame1: TFrame1
       Top = 378
       Width = 317
       Height = 67
+      Hint = 'Commit Message'
       Align = alBottom
-      Lines.Strings = (
-        'MemoCommit')
+      ParentShowHint = False
       ScrollBars = ssVertical
+      ShowHint = True
       TabOrder = 0
+      ExplicitLeft = 8
     end
     object btnCommit: TButton
       AlignWithMargins = True
@@ -100,18 +102,21 @@ object Frame1: TFrame1
       Left = 1
       Top = 1
       Width = 323
-      Height = 335
+      Height = 329
       Align = alClient
       CheckBoxes = True
       Images = imgGitStatus
       Indent = 19
       TabOrder = 2
+      ExplicitHeight = 335
     end
     object chkSelectAll: TCheckBox
-      Left = 1
-      Top = 336
-      Width = 323
+      AlignWithMargins = True
+      Left = 6
+      Top = 333
+      Width = 315
       Height = 39
+      Margins.Left = 5
       Align = alBottom
       Caption = 'Select All'
       Font.Charset = DEFAULT_CHARSET
@@ -122,6 +127,9 @@ object Frame1: TFrame1
       ParentFont = False
       TabOrder = 3
       OnClick = chkSelectAllClick
+      ExplicitLeft = 1
+      ExplicitTop = 336
+      ExplicitWidth = 323
     end
   end
   object tmrGitCheck: TTimer
