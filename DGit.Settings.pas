@@ -226,7 +226,7 @@ begin
   else
     Scope := '--local';
 
-  // 2. İsim ve E-posta Ayarlarını Kaydetme
+  // 2. İsim ve E-posta Ayarlarını Kaydetmeasdasd
   if Trim(edtUserName.Text) <> '' then
     RunGitCommand('git config ' + Scope + ' user.name "' +
       Trim(edtUserName.Text) + '"', ProjDir);
