@@ -76,7 +76,7 @@ git clone https://github.com/yushadev0/dgit.git
 ## Roadmap
 - Pull
 - Visual Diff
-- Git History
+- ~~Git History~~
 - Conflict Resolution
 - Much beautiful track icons
 ---
