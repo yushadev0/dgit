@@ -577,18 +577,18 @@ begin
     end;
 
     tvFiles.CustomSort(@TreeSortProc, 0, True);
-  finally
-    tvFiles.Items.EndUpdate;
-  end;
-  RefreshUnpushedList;
 
-  if tvFiles.Items.Count = 0 then
+    if tvFiles.Items.Count = 0 then
   begin
     Label3.Caption := 'Files Status (No modified file(s))';
   end else
   begin
     Label3.Caption := 'Files Status';
   end;
+  finally
+    tvFiles.Items.EndUpdate;
+  end;
+  RefreshUnpushedList;
 end;
 
 procedure TFrame1.tmrGitCheckTimer(Sender: TObject);
