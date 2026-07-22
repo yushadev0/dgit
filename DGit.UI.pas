@@ -29,6 +29,10 @@ type
     miCommitAndPush: TMenuItem;
     chkSelectAll: TCheckBox;
     miPushOnly: TMenuItem;
+    pnlUnpushed: TPanel;
+    Splitter1: TSplitter;
+    lblUnpushedCount: TLabel;
+    lbUnpushed: TListBox;
     procedure btnCommitClick(Sender: TObject);
     procedure btnInitClick(Sender: TObject);
     procedure btnCloneClick(Sender: TObject);
@@ -44,6 +48,7 @@ type
     procedure CheckRepositoryState;
     procedure RefreshFileList;
     procedure ExecuteCommit(PushAfter: Boolean);
+    procedure RefreshUnpushedList;
 
     var FLastGitStatus: string;
   end;
@@ -424,15 +429,14 @@ begin
   else
   // Eğer repo VARSA
   begin
-    // Sadece şu an pnlNoRepo görünürse (yani repo yeni oluşturulduysa) panelleri değiştir
     if pnlNoRepo.Visible then
     begin
       pnlNoRepo.Visible := False;
       pnlRepo.Visible := True;
       pnlRepo.BringToFront;
 
-      // Paneli yeni açtığımız için dosyaları da bir kere dolduralım
       RefreshFileList;
+      RefreshUnpushedList;
     end;
   end;
 end;
@@ -570,6 +574,7 @@ begin
   finally
     tvFiles.Items.EndUpdate;
   end;
+  RefreshUnpushedList;
 end;
 
 procedure TFrame1.tmrGitCheckTimer(Sender: TObject);
@@ -712,6 +717,61 @@ begin
   else
   begin
     ShowMessage('Successfully pushed to ''' + BranchName + '''!');
+  end;
+end;
+
+procedure TFrame1.RefreshUnpushedList;
+var
+  ProjDir, GitOutput, BranchName, Line: string;
+  Lines: TStringList;
+  i: Integer;
+begin
+  ProjDir := GetActiveProjectDir;
+  if ProjDir = '' then Exit;
+
+  lbUnpushed.Items.BeginUpdate;
+  try
+    lbUnpushed.Items.Clear;
+    lblUnpushedCount.Caption := 'Unpushed Commits (0)';
+
+    // 1. Önce aktif dalı (branch) alalım
+    BranchName := Trim(RunGitCommand('git branch --show-current', ProjDir));
+    if BranchName = '' then Exit; // Repoda henüz hiç commit yoksa çık
+
+    // 2. Upstream (sunucu bağlantısı) var mı kontrol et
+    GitOutput := Trim(RunGitCommand('git rev-parse --abbrev-ref ' + BranchName + '@{u}', ProjDir));
+
+    if (Pos('fatal:', GitOutput) > 0) or (Pos('error:', GitOutput) > 0) or (GitOutput = '') then
+    begin
+      // Upstream yok (Yani henüz hiç push atılmamış). Tüm yerel commitleri getir.
+      GitOutput := RunGitCommand('git log --pretty=format:"%h - %s"', ProjDir);
+    end
+    else
+    begin
+      // Upstream var. Sadece sunucu ile aradaki farkı (unpushed olanları) getir.
+      GitOutput := RunGitCommand('git log @{u}..HEAD --pretty=format:"%h - %s"', ProjDir);
+    end;
+
+    // Eğer bekleyen commit yoksa işlem tamamdır
+    if Trim(GitOutput) = '' then Exit;
+
+    // 3. Gelen veriyi listeye doldur ve sayacı güncelle
+    Lines := TStringList.Create;
+    try
+      Lines.Text := GitOutput;
+      for i := 0 to Lines.Count - 1 do
+      begin
+        Line := Trim(Lines[i]);
+        if Line <> '' then
+          lbUnpushed.Items.Add(Line);
+      end;
+      // Başlığı dinamik olarak güncelle
+      lblUnpushedCount.Caption := 'Unpushed Commits (' + IntToStr(Lines.Count) + ')';
+    finally
+      Lines.Free;
+    end;
+  finally
+    lbUnpushed.Items.EndUpdate;
   end;
 end;
 

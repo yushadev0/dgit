@@ -12,6 +12,7 @@ object frmDGitHistory: TfrmDGitHistory
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poScreenCenter
   OnShow = FormShow
   TextHeight = 15
   object lvHistory: TListView
@@ -39,6 +40,5 @@ object frmDGitHistory: TfrmDGitHistory
       end>
     TabOrder = 0
     ViewStyle = vsReport
-    ExplicitLeft = 8
   end
 end

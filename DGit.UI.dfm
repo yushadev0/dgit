@@ -4,69 +4,6 @@ object Frame1: TFrame1
   Width = 325
   Height = 480
   TabOrder = 0
-  object pnlRepo: TPanel
-    Left = 0
-    Top = 0
-    Width = 325
-    Height = 480
-    Align = alClient
-    TabOrder = 1
-    object memoCommit: TMemo
-      AlignWithMargins = True
-      Left = 4
-      Top = 378
-      Width = 317
-      Height = 67
-      Hint = 'Commit Message'
-      Align = alBottom
-      ParentShowHint = False
-      ScrollBars = ssVertical
-      ShowHint = True
-      TabOrder = 0
-    end
-    object btnCommit: TButton
-      AlignWithMargins = True
-      Left = 4
-      Top = 451
-      Width = 317
-      Height = 25
-      Align = alBottom
-      Caption = 'Commit'
-      Style = bsSplitButton
-      TabOrder = 1
-      OnClick = btnCommitClick
-      OnDropDownClick = btnCommitDropDownClick
-    end
-    object tvFiles: TTreeView
-      Left = 1
-      Top = 1
-      Width = 323
-      Height = 329
-      Align = alClient
-      CheckBoxes = True
-      Images = imgGitStatus
-      Indent = 19
-      TabOrder = 2
-    end
-    object chkSelectAll: TCheckBox
-      AlignWithMargins = True
-      Left = 6
-      Top = 333
-      Width = 315
-      Height = 39
-      Margins.Left = 5
-      Align = alBottom
-      Caption = 'Select All'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -20
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
-      OnClick = chkSelectAllClick
-    end
-  end
   object pnlNoRepo: TPanel
     Left = 0
     Top = 0
@@ -125,6 +62,117 @@ object Frame1: TFrame1
       ParentFont = False
       TabOrder = 1
       OnClick = btnCloneClick
+    end
+  end
+  object pnlRepo: TPanel
+    Left = 0
+    Top = 0
+    Width = 325
+    Height = 480
+    Align = alClient
+    TabOrder = 1
+    object Splitter1: TSplitter
+      Left = 1
+      Top = 192
+      Width = 323
+      Height = 12
+      Cursor = crVSplit
+      Align = alBottom
+      ExplicitTop = 244
+    end
+    object memoCommit: TMemo
+      AlignWithMargins = True
+      Left = 4
+      Top = 378
+      Width = 317
+      Height = 67
+      Hint = 'Commit Message'
+      Align = alBottom
+      ParentShowHint = False
+      ScrollBars = ssVertical
+      ShowHint = True
+      TabOrder = 0
+    end
+    object btnCommit: TButton
+      AlignWithMargins = True
+      Left = 4
+      Top = 451
+      Width = 317
+      Height = 25
+      Align = alBottom
+      Caption = 'Commit'
+      Style = bsSplitButton
+      TabOrder = 1
+      OnClick = btnCommitClick
+      OnDropDownClick = btnCommitDropDownClick
+    end
+    object tvFiles: TTreeView
+      Left = 1
+      Top = 1
+      Width = 323
+      Height = 191
+      Align = alClient
+      CheckBoxes = True
+      Images = imgGitStatus
+      Indent = 19
+      TabOrder = 2
+      ExplicitHeight = 184
+    end
+    object chkSelectAll: TCheckBox
+      AlignWithMargins = True
+      Left = 6
+      Top = 333
+      Width = 315
+      Height = 39
+      Margins.Left = 5
+      Align = alBottom
+      Caption = 'Select All'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = chkSelectAllClick
+    end
+    object pnlUnpushed: TPanel
+      AlignWithMargins = True
+      Left = 4
+      Top = 207
+      Width = 317
+      Height = 120
+      Align = alBottom
+      TabOrder = 4
+      object lblUnpushedCount: TLabel
+        Left = 1
+        Top = 1
+        Width = 315
+        Height = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Unpushed Commits (0)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsUnderline]
+        ParentFont = False
+        ExplicitWidth = 123
+      end
+      object lbUnpushed: TListBox
+        Left = 1
+        Top = 16
+        Width = 315
+        Height = 103
+        Align = alClient
+        ItemHeight = 15
+        TabOrder = 0
+        ExplicitLeft = 104
+        ExplicitTop = 22
+        ExplicitWidth = 121
+        ExplicitHeight = 97
+      end
     end
   end
   object tmrGitCheck: TTimer
