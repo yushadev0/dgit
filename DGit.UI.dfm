@@ -73,77 +73,32 @@ object Frame1: TFrame1
     TabOrder = 1
     object Splitter1: TSplitter
       Left = 1
-      Top = 192
+      Top = 229
       Width = 323
-      Height = 12
+      Height = 5
       Cursor = crVSplit
       Align = alBottom
-      ExplicitTop = 244
+      Color = clBlack
+      ParentColor = False
+      ExplicitTop = 222
     end
-    object memoCommit: TMemo
-      AlignWithMargins = True
-      Left = 4
-      Top = 378
-      Width = 317
-      Height = 67
-      Hint = 'Commit Message'
-      Align = alBottom
-      ParentShowHint = False
-      ScrollBars = ssVertical
-      ShowHint = True
-      TabOrder = 0
-    end
-    object btnCommit: TButton
-      AlignWithMargins = True
-      Left = 4
-      Top = 451
-      Width = 317
-      Height = 25
-      Align = alBottom
-      Caption = 'Commit'
-      Style = bsSplitButton
-      TabOrder = 1
-      OnClick = btnCommitClick
-      OnDropDownClick = btnCommitDropDownClick
-    end
-    object tvFiles: TTreeView
+    object Bevel1: TBevel
       Left = 1
-      Top = 1
+      Top = 222
       Width = 323
-      Height = 191
-      Align = alClient
-      CheckBoxes = True
-      Images = imgGitStatus
-      Indent = 19
-      TabOrder = 2
-      ExplicitHeight = 184
-    end
-    object chkSelectAll: TCheckBox
-      AlignWithMargins = True
-      Left = 6
-      Top = 333
-      Width = 315
-      Height = 39
-      Margins.Left = 5
+      Height = 7
       Align = alBottom
-      Caption = 'Select All'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -20
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
-      OnClick = chkSelectAllClick
+      Shape = bsTopLine
+      ExplicitTop = 216
     end
     object pnlUnpushed: TPanel
       AlignWithMargins = True
       Left = 4
-      Top = 207
+      Top = 237
       Width = 317
       Height = 120
       Align = alBottom
-      TabOrder = 4
+      TabOrder = 0
       object lblUnpushedCount: TLabel
         Left = 1
         Top = 1
@@ -168,10 +123,113 @@ object Frame1: TFrame1
         Align = alClient
         ItemHeight = 15
         TabOrder = 0
-        ExplicitLeft = 104
-        ExplicitTop = 22
-        ExplicitWidth = 121
-        ExplicitHeight = 97
+        OnDblClick = lbUnpushedDblClick
+      end
+    end
+    object pnlCommitMessage: TPanel
+      Left = 1
+      Top = 360
+      Width = 323
+      Height = 119
+      Align = alBottom
+      Caption = 'pnlCommitMessage'
+      TabOrder = 1
+      object Label2: TLabel
+        Left = 1
+        Top = 1
+        Width = 321
+        Height = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Commit Message'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsUnderline]
+        ParentFont = False
+        ExplicitWidth = 93
+      end
+      object memoCommit: TMemo
+        AlignWithMargins = True
+        Left = 4
+        Top = 17
+        Width = 315
+        Height = 67
+        Hint = 'Commit Message'
+        Align = alBottom
+        ParentShowHint = False
+        ScrollBars = ssVertical
+        ShowHint = True
+        TabOrder = 0
+      end
+      object btnCommit: TButton
+        AlignWithMargins = True
+        Left = 4
+        Top = 90
+        Width = 315
+        Height = 25
+        Align = alBottom
+        Caption = 'Commit'
+        Style = bsSplitButton
+        TabOrder = 1
+        OnClick = btnCommitClick
+        OnDropDownClick = btnCommitDropDownClick
+      end
+    end
+    object pnlFiles: TPanel
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 317
+      Height = 215
+      Align = alClient
+      Caption = 'pnlFiles'
+      TabOrder = 2
+      object Label3: TLabel
+        Left = 1
+        Top = 1
+        Width = 315
+        Height = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'File Status'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsUnderline]
+        ParentFont = False
+        ExplicitWidth = 53
+      end
+      object chkSelectAll: TCheckBox
+        AlignWithMargins = True
+        Left = 6
+        Top = 192
+        Width = 307
+        Height = 19
+        Margins.Left = 5
+        Align = alBottom
+        Caption = 'Select All'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -18
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = chkSelectAllClick
+      end
+      object tvFiles: TTreeView
+        Left = 1
+        Top = 16
+        Width = 315
+        Height = 173
+        Align = alClient
+        CheckBoxes = True
+        Images = imgGitStatus
+        Indent = 19
+        TabOrder = 1
       end
     end
   end

@@ -20,8 +20,6 @@ type
     btnClone: TButton;
     Label1: TLabel;
     pnlRepo: TPanel;
-    memoCommit: TMemo;
-    btnCommit: TButton;
     tvFiles: TTreeView;
     tmrGitCheck: TTimer;
     imgGitStatus: TImageList;
@@ -33,6 +31,13 @@ type
     Splitter1: TSplitter;
     lblUnpushedCount: TLabel;
     lbUnpushed: TListBox;
+    pnlCommitMessage: TPanel;
+    memoCommit: TMemo;
+    btnCommit: TButton;
+    Label2: TLabel;
+    Bevel1: TBevel;
+    pnlFiles: TPanel;
+    Label3: TLabel;
     procedure btnCommitClick(Sender: TObject);
     procedure btnInitClick(Sender: TObject);
     procedure btnCloneClick(Sender: TObject);
@@ -41,6 +46,7 @@ type
     procedure btnCommitDropDownClick(Sender: TObject);
     procedure chkSelectAllClick(Sender: TObject);
     procedure miPushOnlyClick(Sender: TObject);
+    procedure lbUnpushedDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -594,7 +600,8 @@ begin
   if CurrentStatus <> FLastGitStatus then
   begin
     FLastGitStatus := CurrentStatus; // Yeni durumu hafızaya al
-    RefreshFileList;                 // Ve sadece şimdi listeyi yenile!
+    RefreshFileList;
+    RefreshUnpushedList;                 // Ve sadece şimdi listeyi yenile!
   end;
 end;
 
@@ -683,6 +690,46 @@ begin
   // 6. İşlem bittikten sonra ortalığı temizle
   memoCommit.Clear;
   RefreshFileList;
+end;
+
+procedure TFrame1.lbUnpushedDblClick(Sender: TObject);
+var
+  SelectedLine, CommitHash, GitOutput: string;
+  DetailForm: TForm;
+  MemoView: TMemo;
+begin
+  if lbUnpushed.ItemIndex = -1 then Exit;
+
+  SelectedLine := lbUnpushed.Items[lbUnpushed.ItemIndex];
+
+  CommitHash := Trim(Copy(SelectedLine, 1, Pos(' ', SelectedLine) - 1));
+
+  if CommitHash = '' then Exit;
+
+  GitOutput := RunGitCommand('git show --stat ' + CommitHash, GetActiveProjectDir);
+
+  DetailForm := TForm.Create(nil);
+  try
+    DetailForm.Caption := 'Commit Details: ' + CommitHash;
+    DetailForm.Width := 800;
+    DetailForm.Height := 450;
+    DetailForm.Position := poScreenCenter;
+    DetailForm.BorderStyle := bsSizeToolWin;
+
+    MemoView := TMemo.Create(DetailForm);
+    MemoView.Parent := DetailForm;
+    MemoView.Align := alClient;
+    MemoView.ScrollBars := ssBoth;
+    MemoView.ReadOnly := True;
+
+    MemoView.Font.Name := 'Consolas';
+    MemoView.Font.Size := 10;
+    MemoView.Lines.Text := GitOutput;
+
+    DetailForm.ShowModal;
+  finally
+    DetailForm.Free;
+  end;
 end;
 
 procedure TFrame1.miCommitAndPushClick(Sender: TObject);
