@@ -783,7 +783,9 @@ begin
 
     // 1. Önce aktif dalı (branch) alalım
     BranchName := Trim(RunGitCommand('git branch --show-current', ProjDir));
-    if BranchName = '' then Exit; // Repoda henüz hiç commit yoksa çık
+
+    // YENİ GÜVENLİK: Eğer dal yoksa VEYA branch komutu kendisi bir hata döndürdüyse doğrudan çık
+    if (BranchName = '') or (Pos('fatal:', BranchName) > 0) then Exit;
 
     // 2. Upstream (sunucu bağlantısı) var mı kontrol et
     GitOutput := Trim(RunGitCommand('git rev-parse --abbrev-ref ' + BranchName + '@{u}', ProjDir));
@@ -799,8 +801,11 @@ begin
       GitOutput := RunGitCommand('git log @{u}..HEAD --pretty=format:"%h - %s"', ProjDir);
     end;
 
-    // Eğer bekleyen commit yoksa işlem tamamdır
-    if Trim(GitOutput) = '' then Exit;
+    // --- İŞTE EKSİK OLAN HAYAT KURTARICI KONTROL BURASI ---
+    // Eğer bekleyen commit yoksa VEYA dönen metin aslında bir Git hata mesajıysa (fatal/error) listeye ekleme ve çık
+    if (Trim(GitOutput) = '') or (Pos('fatal:', GitOutput) > 0) or (Pos('error:', GitOutput) > 0) then
+      Exit;
+    // ------------------------------------------------------
 
     // 3. Gelen veriyi listeye doldur ve sayacı güncelle
     Lines := TStringList.Create;

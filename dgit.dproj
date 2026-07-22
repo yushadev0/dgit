@@ -136,6 +136,10 @@
             <Form>frmDGitSettings</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="DGit.History.pas">
+            <Form>frmDGitHistory</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

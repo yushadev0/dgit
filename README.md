@@ -9,6 +9,7 @@ DGit is a fully native, dockable Git plugin for the Delphi IDE that brings moder
 ![DGit Screenshot](varliklar/ss1.png)
 ![DGit Screenshot](varliklar/ss2.png)
 ![DGit Screenshot](varliklar/ss3.png)
+![DGit Screenshot](varliklar/ss4.png)
 
 ---
 
@@ -33,6 +34,12 @@ DGit is a fully native, dockable Git plugin for the Delphi IDE that brings moder
 - Commit & Push
 - Automatic branch name configuration for new repositories
 
+### History & Commit Tracking
+
+- **Unpushed Commits Panel:** Dedicated, resizable bottom panel displaying pending local commits.
+- **Git History Screen:** Complete log view detailing Hash, Author, Date, Message, and Push Status.
+- **Commit Details View:** Double-click any commit to instantly see file changes and line statistics (+ / -) in a dynamic, terminal-styled window.
+
 ### Branch Management
 
 - Create branches
@@ -50,7 +57,6 @@ DGit is a fully native, dockable Git plugin for the Delphi IDE that brings moder
 
 - Generate `.gitignore`
 - Generate `README.md`
-
 ---
 
 ## Installation
@@ -77,6 +83,7 @@ git clone https://github.com/yushadev0/dgit.git
 - Pull
 - Visual Diff
 - ~~Git History~~
+- ~~Unpushed Commits~~
 - Conflict Resolution
 - Much beautiful track icons
 ---

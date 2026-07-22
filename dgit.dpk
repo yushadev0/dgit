@@ -34,6 +34,7 @@ requires
 contains
   DGit.Main in 'DGit.Main.pas',
   DGit.UI in 'DGit.UI.pas' {Frame1: TFrame},
-  DGit.Settings in 'DGit.Settings.pas' {frmDGitSettings};
+  DGit.Settings in 'DGit.Settings.pas' {frmDGitSettings},
+  DGit.History in 'DGit.History.pas' {frmDGitHistory};
 
 end.

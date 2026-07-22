@@ -29,7 +29,6 @@ object frmDGitHistory: TfrmDGitHistory
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    ExplicitTop = 418
     ExplicitWidth = 249
   end
   object lvHistory: TListView
@@ -63,6 +62,6 @@ object frmDGitHistory: TfrmDGitHistory
     TabOrder = 0
     ViewStyle = vsReport
     OnDblClick = lvHistoryDblClick
-    ExplicitHeight = 441
+    ExplicitTop = -6
   end
 end
